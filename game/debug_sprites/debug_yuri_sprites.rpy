@@ -22,3 +22,4 @@ init python:
     for sprite_name in sprite_names:
       renpy.show(sprite_name)
       yuri(f"{index}. Sprite {sprite_name}. {len(sprite_names) - index} left.")
+      index += 1

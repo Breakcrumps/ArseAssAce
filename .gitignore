@@ -1,6 +1,7 @@
 errors.txt
 log.txt
 traceback.txt
+files.txt
 game/cache/bytecode-39.rpyb
 game/cache/py3analysis.rpyb
 game/cache/screens.rpyb
