@@ -2,39 +2,33 @@ init -1 python:
   from itertools import product
 
 init python:
-  def debug_monika_sprites() -> None:
-    head_symbols = [chr(x) for x in range(ord('a'), ord('r') + 1)]
+  def alphabet_from_to(first: str, last: str) -> str:
+    return [chr(x) for x in range(ord(first), ord(last) + 1)]
 
-    sprite_names = [
-      f"monika {l}{r}{head}"
-      for head in head_symbols
-      for l, r in product("12", repeat=2)
-    ]
+  def make_sprite(name: str, left: str, right: str, head: str) -> None:
+    img = Composite((960, 960), (0, 0), f"{name}/{left}l.png", (0, 0), f"{name}/{right}r.png", (0, 1), f"{name}/{head}.png")
+    renpy.image(f"{name} {left}{right}{head}", img)
 
-    monika(f"{len(sprite_names)} in total, Nick!")
+  def make_body_sprite(name: str, body: str, head: str) -> None:
+    img = Composite((960, 960), (0, 0), f"{name}/{body}.png", (0, 0), f"{name}/{head}.png")
+    renpy.image(f"{name} {body}{head}", img)
 
-    index = 1
+  def make_casual_sprite(name: str, left: str, right: str, head: str) -> None:
+    img = Composite((960, 960), (0, 0), f"{name}/{left}bl.png", (0, 0), f"{name}/{right}br.png", (0, 0), f"{name}/{head}.png")
+    renpy.image(f"{name} {left}{right}b{head}", img)
 
-    for sprite_name in sprite_names:
-      renpy.show(sprite_name)
-      monika(f"{index}! Sprite {sprite_name}. {len(sprite_names) - index} left.")
-      index += 1
+  def make_casual_sprite_body_priority(name: str, left: str, right: str, head: str) -> None:
+    img = Composite((960, 960), (0, 0), f"{name}/{head}.png", (0, 0), f"{name}/{left}bl.png", (0, 0), f"{name}/{right}br.png")
+    renpy.image(f"{name} {left}{right}b{head}", img)
+
+  def make_casual_body_sprite(name: str, body: str, head: str) -> None:
+    img = Composite((960, 960), (0, 0), f"{name}/{body}b.png", (0, 0), f"{name}/{head}.png")
+    renpy.image(f"{name} {body}b{head}", img)
+
+  def make_casual_body_sprite_body_priority(name: str, body: str, head: str) -> None:
+    img = Composite((960, 960), (0, 0), f"{name}/{head}.png", (0, 0), f"{name}/{body}b.png")
+    renpy.image(f"{name} {body}b{head}", img)
   
-  def debug_sayori_sprites() -> None:
-    head_symbols = [chr(x) for x in range(ord('a'), ord('y') + 1)]
-
-    sprite_names = [
-      f"sayori {l}{r}{'b' if b else ''}{head}"
-      for head in head_symbols
-      for l, r in product("12", repeat=2)
-      for b in (0, 1)
-    ]
-
-    sayori(f"I can look {len(sprite_names)} ways.")
-
-    index = 1
-
-    for sprite_name in sprite_names:
-      renpy.show(sprite_name)
-      sayori(f"{index}. Sprite {sprite_name}. {len(sprite_names) - index} left.")
-      index += 1
+  def make_default_sprite(name: str, left: str, right: str, head: str) -> None:
+    img = Composite((960, 960), (0, 0), f"{name}/{left}l.png", (0, 0), f"{name}/{right}r.png", (0, 0), f"{name}/{head}.png")
+    renpy.image(f"{name}", img)
