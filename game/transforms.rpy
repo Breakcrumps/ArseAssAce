@@ -20,16 +20,20 @@ transform left_hop:
   ease .1 yalign 0.
   pause .05
   ease .1 yalign 1.
+
 transform duck:
   ease .3 yalign 1.5
+
 transform restand:
   ease .1 yalign 1.
+
 transform slide_left:
   ease .2 left
 transform slide_right:
   ease .2 right
 transform slide_center:
   ease .2 center
+
 transform bopped:
   linear .05:
     yalign .95
